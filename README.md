@@ -2,14 +2,34 @@
 ### Example project to demonstrate grpc server architecture using Nginx+Envoy as reverse proxies
 This demo project is for demonstrating how to run grpc server with Nginx+Envoy in docker-compose together with browser and regular clients
 
-##Architecture
+###Preparation for this demo
+To make this demo work properly, besides installing Docker and docker-compose, we need to have 2 more crucial things:
+* Edit the file 'c:\Windows\System32\drivers\etc\hosts' on Windows or '/etc/hosts' on Linux with following line
+    * 127.0.0.1 grpc.studiozdev.com
+    * This will simulate our local computer as serving this domain
+* Get/generate a real authorized HTTPS certificates for the domain "grpc.studiozdev.com" and generate a selfsigned certificate for localhost
+    * After being generated or fetched, it should be places under the directory "nginx/ssl" in 'certs' and 'private' directories for public and private certificates respectively
 
-![](https://grpc.io/img/grpc-web-proxy.png)
+###build and run
+just run:
+```bash
+docker-compose up --build -d
+```
+After to wath th logs continuously, run
+```bash
+docker-compose logs -f
+```
+
+###Components
 ![](architecture.png)
 
+Since at the moments, browsers does not support GRPC, we must use the Envoy proxy for that:
+![](https://grpc.io/img/grpc-web-proxy.png)
 
-##grpcurl commands
-###grpc.studiozdev.com
+
+
+###grpcurl commands
+####grpc.studiozdev.com
 
 Call server with plaintext (NO HTTPS)
 ```bash
@@ -20,7 +40,7 @@ Call server with encryption
 grpcurl  -d '{"name": "103"}' grpc.studiozdev.com:443 helloworld.Greeter/SayHello
 ```
 
-###localhost with self signed certificate
+####localhost with self signed certificate
 
 Call server with plaintext (NO HTTPS)
 ```bash
@@ -35,8 +55,8 @@ Failed to dial target host "localhost:443": x509: certificate relies on legacy C
 grpcurl -insecure  -d '{"name": "103"}' localhost:443 helloworld.Greeter/SayHello
 ```
 
-##java client commands
-###grpc.studiozdev.com
+###java client commands
+####grpc.studiozdev.com
 
 Call server with plaintext (NO HTTPS)
 ```bash
@@ -47,7 +67,7 @@ Call server with encryption
 docker-compose run -e USE_PLAINTEXT=false -e PORT=443 -e HOSTNAME=grpc.studiozdev.com client
 ```
 
-###localhost with self signed certificate
+####localhost with self signed certificate
 
 Call server with plaintext (NO HTTPS)
 ```bash
@@ -62,4 +82,5 @@ Caused by: java.net.ConnectException: Connection refused
 ```
 
 
-
+####From browser
+Open your browser in [https://grpc.studiozdev.com] 
