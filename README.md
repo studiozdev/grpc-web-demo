@@ -94,6 +94,6 @@ Install From [bloomrpc](https://github.com/bloomrpc/bloomrpc). This tool allows 
 After importing the "base/helloworld.proto" file, you can start testing the following scenarios: 
 * WEB with domain grpc.studiozdev.com no TLS, port 50051 [bloom_web_studiozdev_plaintext](/bloom_web_studiozdev_plaintext.png)
 * GRPC with domain grpc.studiozdev.com no TLS, port 50051 [bloom_grpc_studiozdev_plaintext](/bloom_grpc_studiozdev_plaintext.png)
-* GRPC With domain grpc.studiozdev.com with TLS, port 443, we will need to tell it where is the certificate
+* GRPC With domain grpc.studiozdev.com with TLS, port 443, we will need to tell it where is the certificate [bloom_grpc_studiozdev_tls - 1](/bloom_grpc_studiozdev_tls-a.png) and [bloom_grpc_studiozdev_tls - 2](/bloom_grpc_studiozdev_tls-b.png)
 * With domain localhost no TLS, port 50051
 * With domain localhost with TLS, port 443, we will need to tell it where is the certificate
