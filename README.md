@@ -91,7 +91,7 @@ We can see it still works because we don't use GRPC from the browser but the bro
 
 #### From BloomRPC
 Install From [https://github.com/bloomrpc/bloomrpc]. This tool allows us to simulate both GRPC and web calls.
-After importing the "base/helloworld.proto" file, you can start testing the following scenarios: [/bloom_web_studiozdev_plaintext.png]
+After importing the "base/helloworld.proto" file, you can start testing the following scenarios: [https://github.com/studiozdev/grpc-web-demo/blob/main/bloom_web_studiozdev_plaintext.png]
 * GRPC with domain grpc.studiozdev.com no TLS, port 50051 [bloom_web_studiozdev_tls.png] 
 * GRPC With domain grpc.studiozdev.com with TLS, port 443, we will need to tell it where is the certificate
 * With domain localhost no TLS, port 50051
