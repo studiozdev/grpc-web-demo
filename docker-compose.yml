@@ -1,0 +1,80 @@
+version: '3.6'
+services:
+  base:
+    build:
+      context: ./base
+      dockerfile: ./Dockerfile
+  js:
+    build:
+      context: ./js
+      dockerfile: ./Dockerfile
+  server1:
+    build:
+      context: ./java-server
+      dockerfile: ./Dockerfile
+    ports:
+      - 50001:50001
+    environment:
+      HOSTNAME: "server1"
+      PORT: "50001"
+    depends_on:
+      - base
+    networks:
+      - grpc
+  client:
+    build:
+      context: ./java-client
+      dockerfile: ./Dockerfile
+    environment:
+      HOSTNAME: "grpc.studiozdev.com"
+      PORT: "50051"
+      USE_PLAINTEXT: "true"
+    depends_on:
+      - server1
+    network_mode: host
+    secrets:
+      - nginx.cert
+      - nginx.key
+      - nginx-selfsigned.cert
+      - nginx-selfsigned.key
+  envoy:
+    build:
+      context: ./envoy
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - server1
+    networks:
+      - grpc
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+      - "50051:50051"
+    links:
+      - server1
+      - envoy
+    secrets:
+      - nginx.cert
+      - nginx.key
+      - nginx-selfsigned.cert
+      - nginx-selfsigned.key
+    networks:
+      - grpc
+
+networks:
+  grpc:
+
+secrets:
+  nginx.cert:
+    file: ./nginx/ssl/certs/grpc.studiozdev.com.crt
+  nginx.key:
+    file: ./nginx/ssl/private/grpc.studiozdev.com.key
+  nginx-selfsigned.cert:
+    file: ./nginx/ssl/certs/nginx-selfsigned.crt
+  nginx-selfsigned.key:
+    file: ./nginx/ssl/private/nginx-selfsigned.key
