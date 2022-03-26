@@ -100,3 +100,4 @@ After importing the "base/helloworld.proto" file, you can start testing the foll
   * WEB with domain localhost no TLS, port 50051 [bloom_web_localhost_plaintext](/bloom_web_localhost_plaintext.png)    
   * GRPC with domain localhost no TLS, port 50051 [bloom_grpc_studiozdev_plaintext](/bloom_grpc_localhost_plaintext.png)
   * GRPC With domain localhost with TLS, port 443, we will need to tell it where is the certificate [bloom_grpc_localhost_tls_with_server_certificate - 1](/bloom_grpc_localhost_tls_with_server_certificate.png) and [bloom_grpc_localhost_tls_with_server_certificate - 2](/bloom_grpc_localhost_tls_with_server_certificate-b.png)
+    *  After importing the certificate, it will work: [bloom_grpv_localhost_import_cert](/bloom_grpc_localhost_tls_with_import_cert.png) [bloom_grpv_localhost_import_cert - 2](/bloom_grpc_localhost_tls_with_import_cert.png)
