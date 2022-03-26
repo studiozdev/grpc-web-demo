@@ -83,4 +83,16 @@ Caused by: java.net.ConnectException: Connection refused
 
 
 #### From browser
-Open your browser in [https://grpc.studiozdev.com] 
+Open your browser in [https://grpc.studiozdev.com], open Devtools (F12),  see screenshot and watch logs:
+![](browser1.png)
+To test it with localhost with selfsigned certificate, open in [https://localhost:443].
+We can see it still works because we don't use GRPC from the browser but the browser will complain about that the certificate is not valid, see screenshot:
+![](browser_localhost.png)
+
+#### From BloomRPC
+Install From [https://github.com/bloomrpc/bloomrpc]. This tool allows us to simulate both GRPC and web calls.
+After importing the "base/helloworld.proto" file, you can start testing the following scenarios:
+* With domain grpc.studiozdev.com no TLS, port 50051 
+* With domain grpc.studiozdev.com with TLS, port 443, we will need to tell it where is the certificate
+* With domain localhost no TLS, port 50051
+* With domain localhost with TLS, port 443, we will need to tell it where is the certificate
