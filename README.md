@@ -2,7 +2,7 @@
 ### Example project to demonstrate grpc server architecture using Nginx+Envoy as reverse proxies
 This demo project is for demonstrating how to run grpc server with Nginx+Envoy in docker-compose together with browser and regular clients
 
-###Preparation for this demo
+### Preparation for this demo
 To make this demo work properly, besides installing Docker and docker-compose, we need to have 2 more crucial things:
 * Edit the file 'c:\Windows\System32\drivers\etc\hosts' on Windows or '/etc/hosts' on Linux with following line
     * 127.0.0.1 grpc.studiozdev.com
@@ -10,7 +10,7 @@ To make this demo work properly, besides installing Docker and docker-compose, w
 * Get/generate a real authorized HTTPS certificates for the domain "grpc.studiozdev.com" and generate a selfsigned certificate for localhost
     * After being generated or fetched, it should be places under the directory "nginx/ssl" in 'certs' and 'private' directories for public and private certificates respectively
 
-###build and run
+### build and run
 just run:
 ```bash
 docker-compose up --build -d
@@ -20,7 +20,7 @@ After to wath th logs continuously, run
 docker-compose logs -f
 ```
 
-###Components
+### Components
 ![](architecture.png)
 
 Since at the moments, browsers does not support GRPC, we must use the Envoy proxy for that:
@@ -28,8 +28,8 @@ Since at the moments, browsers does not support GRPC, we must use the Envoy prox
 
 
 
-###grpcurl commands
-####grpc.studiozdev.com
+### grpcurl commands
+#### grpc.studiozdev.com
 
 Call server with plaintext (NO HTTPS)
 ```bash
@@ -40,7 +40,7 @@ Call server with encryption
 grpcurl  -d '{"name": "103"}' grpc.studiozdev.com:443 helloworld.Greeter/SayHello
 ```
 
-####localhost with self signed certificate
+#### localhost with self signed certificate
 
 Call server with plaintext (NO HTTPS)
 ```bash
@@ -67,7 +67,7 @@ Call server with encryption
 docker-compose run -e USE_PLAINTEXT=false -e PORT=443 -e HOSTNAME=grpc.studiozdev.com client
 ```
 
-####localhost with self signed certificate
+#### localhost with self signed certificate
 
 Call server with plaintext (NO HTTPS)
 ```bash
@@ -82,5 +82,5 @@ Caused by: java.net.ConnectException: Connection refused
 ```
 
 
-####From browser
+#### From browser
 Open your browser in [https://grpc.studiozdev.com] 
