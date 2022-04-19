@@ -19,11 +19,11 @@ stages:
     displayName: Build
     pool:
       vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build an image
+    steps:    
+    - task: SSH@0
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/base/Dockerfile'
-        tags: |
-          $(tag)
+        sshEndpoint: 'JobServerVM'
+        runOptions: 'commands'
+        commands: 'echo pong'
+        readyTimeout: '20000'
+      
